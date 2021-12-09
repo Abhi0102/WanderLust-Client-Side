@@ -1,0 +1,9 @@
+<div class="row">
+    <div class="col-md-6">
+        <input type="file" (change)="onFileSelect($event)">
+        <button class="btn btn-info" (click)="onUpload()">Click Here To Upload Pic</button>
+    </div>
+    <div class="col-md-6">
+        <img [src]="retrivedImage" height="200">
+    </div>
+</div>

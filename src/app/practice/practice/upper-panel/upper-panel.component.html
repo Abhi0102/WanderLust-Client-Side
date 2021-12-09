@@ -1,0 +1,53 @@
+<section class="upper-pannel">
+    <div class="card-deck">
+
+        <div class="card text-center text-white shadow" [ngStyle]="{'background-color': confirmedColor}"
+            (mouseover)="cardHover($event,'confirmed')" (mouseout)="cardHover($event,'confirmed')">
+            <div class="card-header text-danger">Confirmed</div>
+            <div class="card-body text-white">
+                <span style="font-size: 0.8rem;" class="text-danger"><i class="pi pi-arrow-up"
+                        style="font-size: 0.7rem"></i> {{lastDayChange[2].TT |number}}</span><br>
+                {{total.total.confirmed |number}}
+
+            </div>
+
+        </div>
+
+        <div class="card text-center text-warning shadow" [ngStyle]="{'background-color': activeColor}"
+            (mouseover)="cardHover($event,'active')" (mouseout)="cardHover($event,'active')">
+            <div class="card-header">Active</div>
+            <div class="card-body text-white">
+                <span style="font-size: 0.8rem;" class="text-warning">
+                    <i class="pi {{arrowImage}}" style="font-size: 0.7rem"></i>
+                    {{totalActivePerDay |absolute |number}}</span><br>
+                {{totalActive|number}}
+
+            </div>
+
+        </div>
+
+        <div class="card text-center text-danger shadow" [ngStyle]="{'background-color': deceasedColor}"
+            (mouseover)="cardHover($event,'deceased')" (mouseout)="cardHover($event,'deceased')">
+            <div class="card-header">Deceased</div>
+            <div class="card-body text-white">
+                <span style="font-size: 0.8rem;" class="text-danger"><i class="pi pi-arrow-up"
+                        style="font-size: 0.7rem"></i> {{lastDayChange[0].TT |number}}</span><br>
+                {{total.total.deceased |number}}
+
+            </div>
+
+        </div>
+
+        <div class="card text-center text-success shadow" [ngStyle]="{'background-color': recoveredColor}"
+            (mouseover)="cardHover($event,'recovered')" (mouseout)="cardHover($event,'recovered')">
+            <div class="card-header">Recovered</div>
+            <div class="card-body text-white">
+                <span style="font-size: 0.8rem;" class="text-success"><i class="pi pi-arrow-up"
+                        style="font-size: 0.7rem"></i> {{lastDayChange[1].TT |number}}</span><br>
+                {{total.total.recovered |number}}
+
+            </div>
+
+        </div>
+    </div>
+</section>

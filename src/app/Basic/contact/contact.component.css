@@ -1,0 +1,28 @@
+.card .card-body a{
+    font-size: 0.7rem;
+    letter-spacing: 0.15rem;
+}
+.contact-section{
+    background: #161616;
+    padding-top: 5rem;
+    padding-bottom: 6rem;
+}
+
+.contact-section .card{
+    border: 0;
+    border-bottom: 0.25rem solid rgb(197, 110, 78);
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+.contact-section .card h5 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15rem;
+  }
+
+  .contact-section .card hr {
+    border-color: rgb(197, 110, 78);
+    border-width: 0.25rem;
+    width: 3.5rem;
+  }

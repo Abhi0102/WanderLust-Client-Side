@@ -1,0 +1,57 @@
+<!-- <div class="bg">
+    <br><br>
+    <div class="container-fluid">
+        <app-upper-panel></app-upper-panel>
+        <div class="row">
+            
+            <div class="col-md-2 offset-md-1 india text-white">
+                <h3>India</h3>
+                <p style="font-size: 12px;">Last Updated on {{total.meta.last_updated | date:'MMM dd'}} at
+                    {{total.meta.last_updated |date:'shortTime'}}</p>
+            </div>
+
+            <div class="col-md-2 offset-md-1 tested text-white">
+                <p style="font-size: 12px;">Total Tested</p>
+                <h4>{{total.total.tested |number}}</h4>
+                <p style="font-size: 12px;">Last Updated on {{total.meta.tested.last_updated |date:'MMM dd'}}</p>
+                <p style="font-size: 12px;">as per source</p>
+            </div>
+        </div>
+        <br><br>
+        <app-corona-table></app-corona-table>
+    </div>
+    <br><br><br>
+
+</div> -->
+
+<div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2 offset-md-7 india text-white">
+                <h3>India</h3>
+                <p style="font-size: 12px;">Last Updated on {{total.meta.last_updated | date:'MMM dd'}} at
+                    {{total.meta.last_updated |date:'shortTime'}}</p>
+            </div>
+            <div class="col-md-2 offset-md-1 tested text-white">
+                <p style="font-size: 12px;">Total Tested</p>
+                <h4>{{total.total.tested |number}}</h4>
+                <p style="font-size: 12px;">Last Updated on {{total.meta.tested.last_updated |date:'MMM dd'}}</p>
+                <p style="font-size: 12px;">as per source</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <app-upper-panel></app-upper-panel>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-{{expander}}">
+                <app-corona-table (expanderEvent)='expanderEvent($event)'></app-corona-table>
+            </div>
+            <div class="col-md-6 map">
+                <app-map></app-map>
+            </div>
+        </div>
+    </div>
+</div>

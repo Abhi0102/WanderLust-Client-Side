@@ -1,0 +1,169 @@
+<section class="corona-table">
+    <i class="fas fa-angle-double-right arrowImg" *ngIf="expander==6" (click)="expandTable()" role="button"></i>
+    <i class="fas fa-angle-double-left arrowImg" *ngIf="expander==12" (click)="expandTable()" role="button"></i>
+
+    <div class="table-responsive">
+        <table class="table table-dark table-hover table-striped table-bordered">
+            <thead class="head" role="button">
+                <tr>
+                    <th style="width: tableWidth;" (click)="sortingActivated('state')">
+                        <i class="sortIcon fas fa-sort-amount-down-alt" *ngIf="clicked && sortBy==='state'"></i>
+                        <i class="sortIcon fas fa-sort-amount-down" *ngIf="!clicked && sortBy==='state'"></i>
+                        <br>State
+                    </th>
+                    <th (click)="sortingActivated('confirmed')">
+                        <i class="sortIcon fas fa-sort-amount-down-alt" *ngIf="clicked && sortBy==='confirmed'"></i>
+                        <i class="sortIcon fas fa-sort-amount-down" *ngIf="!clicked && sortBy==='confirmed'"></i>
+                        <br>Confirmed
+                    </th>
+                    <th (click)="sortingActivated('active')">
+                        <i class="sortIcon fas fa-sort-amount-down-alt" *ngIf="clicked && sortBy==='active'"></i>
+                        <i class="sortIcon fas fa-sort-amount-down" *ngIf="!clicked && sortBy==='active'"></i><br>
+                        Active
+
+                    </th>
+                    <th (click)="sortingActivated('deceased')">
+                        <i class="sortIcon fas fa-sort-amount-down-alt" *ngIf="clicked && sortBy==='deceased'"></i>
+                        <i class="sortIcon fas fa-sort-amount-down" *ngIf="!clicked && sortBy==='deceased'"></i><br>
+                        Deceased
+
+                    </th>
+
+                    <th (click)="sortingActivated('recovered')">
+                        <i class="sortIcon fas fa-sort-amount-down-alt" *ngIf="clicked && sortBy==='recovered'"></i>
+                        <i class="sortIcon fas fa-sort-amount-down" *ngIf="!clicked && sortBy==='recovered'"></i><br>
+                        Recovered
+
+                    </th>
+                    <th (click)="sortingActivated('tested')" *ngIf="expanderClicked">
+                        <i class="sortIcon fas fa-sort-amount-down-alt" *ngIf="clicked && sortBy==='tested'"></i>
+                        <i class="sortIcon fas fa-sort-amount-down" *ngIf="!clicked && sortBy==='tested'"></i><br>
+                        Tested
+
+                    </th>
+                    <th (click)="sortingActivated('activeRatio')" *ngIf="expanderClicked">
+                        <i class="sortIcon fas fa-sort-amount-down-alt" *ngIf="clicked && sortBy==='activeRatio'"></i>
+                        <i class="sortIcon fas fa-sort-amount-down" *ngIf="!clicked && sortBy==='activeRatio'"></i><br>
+                        Active Ratio
+
+                    </th>
+                    <th (click)="sortingActivated('recoveryRatio')" *ngIf="expanderClicked">
+                        <i class="sortIcon fas fa-sort-amount-down-alt" *ngIf="clicked && sortBy==='recoveryRatio'"></i>
+                        <i class="sortIcon fas fa-sort-amount-down"
+                            *ngIf="!clicked && sortBy==='recoveryRatio'"></i><br>
+                        Recovery Ratio
+
+                    </th>
+                    <th (click)="sortingActivated('fatalityRatio')" *ngIf="expanderClicked">
+                        <i class="sortIcon fas fa-sort-amount-down-alt" *ngIf="clicked && sortBy==='fatalityRatio'"></i>
+                        <i class="sortIcon fas fa-sort-amount-down"
+                            *ngIf="!clicked && sortBy==='fatalityRatio'"></i><br>
+                        Fatality Ratio
+
+                    </th>
+                    <th (click)="sortingActivated('testPositivityRatio')" *ngIf="expanderClicked">
+                        <i class="sortIcon fas fa-sort-amount-down-alt"
+                            *ngIf="clicked && sortBy==='testPositivityRatio'"></i>
+                        <i class="sortIcon fas fa-sort-amount-down"
+                            *ngIf="!clicked && sortBy==='testPositivityRatio'"></i><br>
+                        Test Positivity Ratio
+
+                    </th>
+                    <th (click)="sortingActivated('population')" *ngIf="expanderClicked">
+                        <i class="sortIcon fas fa-sort-amount-down-alt" *ngIf="clicked && sortBy==='population'"></i>
+                        <i class="sortIcon fas fa-sort-amount-down" *ngIf="!clicked && sortBy==='population'"></i><br>
+                        Population
+
+                    </th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let i of stateName | sortData:coronaDataStateWise:coronaDataDistrictWise:sortBy:clicked">
+                    <td class="state">{{i}}</td>
+                    <td>
+                        <div class="text-danger change"
+                            *ngIf="lastDayChange[2][coronaDataDistrictWise[i].statecode]!=0">
+                            <i class="pi pi-arrow-up" style="font-size: 10px"></i>
+                            {{lastDayChange[2][coronaDataDistrictWise[i].statecode] |number}}
+                        </div>
+                        <div class="tot">
+                            {{coronaDataStateWise[coronaDataDistrictWise[i].statecode].total.confirmed |number}}
+                        </div>
+
+                    </td>
+                    <td>
+                        <div class="text-warning change"
+                            *ngIf="lastDayChange[2][coronaDataDistrictWise[i].statecode]-lastDayChange[1][coronaDataDistrictWise[i].statecode]-lastDayChange[0][coronaDataDistrictWise[i].statecode]!=0">
+
+                            <i class="pi pi-arrow-up" style="font-size: 10px"
+                                *ngIf="lastDayChange[2][coronaDataDistrictWise[i].statecode]-lastDayChange[1][coronaDataDistrictWise[i].statecode]-lastDayChange[0][coronaDataDistrictWise[i].statecode]>0"></i>
+                            <i class="pi pi-arrow-down" style="font-size: 10px"
+                                *ngIf="lastDayChange[2][coronaDataDistrictWise[i].statecode]-lastDayChange[1][coronaDataDistrictWise[i].statecode]-lastDayChange[0][coronaDataDistrictWise[i].statecode]<0"></i>
+                            {{lastDayChange[2][coronaDataDistrictWise[i].statecode]-lastDayChange[1][coronaDataDistrictWise[i].statecode]-lastDayChange[0][coronaDataDistrictWise[i].statecode] |absolute |number}}
+                        </div>
+                        <div class="tot">
+                            {{coronaDataStateWise[coronaDataDistrictWise[i].statecode].total.confirmed-coronaDataStateWise[coronaDataDistrictWise[i].statecode].total.recovered-coronaDataStateWise[coronaDataDistrictWise[i].statecode].total.deceased |number}}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-danger change"
+                            *ngIf="lastDayChange[0][coronaDataDistrictWise[i].statecode]!=0">
+                            <i class="pi pi-arrow-up" style="font-size: 10px"></i>
+                            {{lastDayChange[0][coronaDataDistrictWise[i].statecode] |number}}
+                        </div>
+                        <div class="tot">
+                            {{coronaDataStateWise[coronaDataDistrictWise[i].statecode].total.deceased |number}}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-success change"
+                            *ngIf="lastDayChange[1][coronaDataDistrictWise[i].statecode]!=0">
+                            <i class="pi pi-arrow-up" style="font-size: 10px"></i>
+                            {{lastDayChange[1][coronaDataDistrictWise[i].statecode] |number}}
+                        </div>
+                        <div class="tot">
+                            {{coronaDataStateWise[coronaDataDistrictWise[i].statecode].total.recovered |number}}
+                        </div>
+
+                    </td>
+                    <td *ngIf="expanderClicked">
+                        <div class="tot" style="color: #ffbf8f;">
+                            {{coronaDataStateWise[coronaDataDistrictWise[i].statecode].total.tested |numberStyle}}
+                        </div>
+                    </td>
+                    <td *ngIf="expanderClicked">
+                        <div class="tot">
+                            {{(coronaDataStateWise[coronaDataDistrictWise[i].statecode].total.confirmed-coronaDataStateWise[coronaDataDistrictWise[i].statecode].total.recovered-coronaDataStateWise[coronaDataDistrictWise[i].statecode].total.deceased)/coronaDataStateWise[coronaDataDistrictWise[i].statecode].total.confirmed |percent:'1.1'}}
+                        </div>
+                    </td>
+                    <td *ngIf="expanderClicked">
+                        <div class="tot">
+                            {{coronaDataStateWise[coronaDataDistrictWise[i].statecode].total.recovered/coronaDataStateWise[coronaDataDistrictWise[i].statecode].total.confirmed |percent:'1.1'}}
+                        </div>
+                    </td>
+                    <td *ngIf="expanderClicked">
+                        <div class="tot">
+                            {{coronaDataStateWise[coronaDataDistrictWise[i].statecode].total.deceased/coronaDataStateWise[coronaDataDistrictWise[i].statecode].total.confirmed |percent:'1.1'}}
+                        </div>
+                    </td>
+                    <td *ngIf="expanderClicked">
+                        <div class="tot">
+                            {{coronaDataStateWise[coronaDataDistrictWise[i].statecode].total.confirmed/coronaDataStateWise[coronaDataDistrictWise[i].statecode].total.tested |percent:'1.1'}}
+                        </div>
+                    </td>
+                    <td *ngIf="expanderClicked">
+                        <div class="tot">
+                            {{coronaDataStateWise[coronaDataDistrictWise[i].statecode].meta.population |numberStyle}}
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+
+
+
+</section>

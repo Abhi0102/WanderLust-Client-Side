@@ -1,0 +1,28 @@
+<section class="hot-deal-sec">
+    <div class="container">
+        <h4>Hot Deals</h4>
+
+        <div class="card-deck" *ngIf="showDeals">
+            <div class="card shadow" *ngFor="let i of dataOfDeals;">
+                <div class="inner">
+                    <img class="card-img-top" src={{i.imageUrl}} alt="Card image">
+                </div>
+                <div class="card-body text-dark">
+                    <h3 class="card-title">{{i.continent}}</h3>
+                    <p class="text-justify">{{i.destinationName}}</p>
+                    <a class="btn btn-info" routerLink="/all-deals" fragment={{i.destinationId}}>More Detail</a>
+                </div>
+            </div>
+
+
+
+
+        </div>
+        <div class="card shadow col-md-4 offset-md-4 error-card" *ngIf="!showDeals && errmsg">
+            <div class="card-body text-danger">
+                {{errmsg}}
+            </div>
+        </div>
+    </div>
+
+</section>

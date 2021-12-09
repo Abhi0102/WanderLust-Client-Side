@@ -1,0 +1,95 @@
+<div class="start">
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <a class="text-dark" routerLink="/all-deals">
+                <h1>All Deals</h1>
+            </a>
+            <!-- <div class="form-inline">
+                <input type="text" class="form-control search" id="place" name="continent" id="continent"
+                    placeholder="Where?" [(ngModel)]="param">&nbsp;
+                    <i class="pi pi-search" style="font-size: 2rem"></i>
+                
+            </div> -->
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input type="text" class="search" pInputText placeholder="Search" [(ngModel)]="param">
+            </span>
+
+
+        </div>
+
+        <div class="col-md-2 offset-md-2">
+            <div class="form-group">
+                <label for="FilterBy">Sort By:</label>
+                <select class="form-control" id="FilterBy:" [(ngModel)]="sorter">
+                    <option value="All">Show All</option>
+                    <option value="destInc">Destination A&#8594;Z</option>
+                    <option value="destDec">Destination Z&#8594;A</option>
+                    <option value="priceDec">Price High&#8594;Low</option>
+                    <option value="priceInc">Price Low&#8594;High</option>
+                    <option value="nightDec">No. of Nights High&#8594;Low</option>
+                    <option value="nightInc">No. of Nights Low&#8594;High</option>
+
+                    <!-- <option *ngFor="let d of continent" value={{d}}>{{d}}</option> -->
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="form-group">
+                <label for="FilterBy">Filter By Continent:</label>
+                <select class="form-control" id="FilterBy:" [(ngModel)]="contiFilter">
+                    <option value="All">Show All</option>
+                    <option *ngFor="let d of continent" value={{d}}>{{d}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- <button (click)="onClick()">Click</button> -->
+    <div *ngIf="!showError">
+        <div class="sec" *ngFor="let d of deals |unique:contiFilter |searchBy:param |sorter:sorter"
+            id={{d.destinationId}}>
+            <hr>
+            <br>
+            <div class="jumbotron">
+                <div class="container-fluid">
+                    <h1>{{d.continent}}</h1>
+
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <h5>{{d.destinationName}}</h5>
+                                </div>
+                                <div class="col-md-2">
+                                    <h5>{{d.noOfNights}} Nights</h5>
+                                </div>
+                            </div>
+                            <p class="about">{{d.details.about | format}}</p>
+                            <h6 class="highlights">Highlights: </h6><span
+                                class="text-justify">{{d.details.highlights | format}}</span>
+                            <button class="btn book btn-info btn-lg btn-block" (click)="show(d)">Book Now</button>
+                            <p class="text-danger pace">*{{d.details.pace |format}}</p>
+                        </div>
+
+                        <div class="col-md-5">
+                            <img src={{d.imageUrl}} class="rounded img-fluid" width="100%">
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+    <hr>
+    <div *ngIf="showError">
+        <h1 class="sorry"><i class="fa  fa-frown-o"></i>&nbsp;{{errMsg}}</h1>
+    </div>
+
+</div>

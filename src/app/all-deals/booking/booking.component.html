@@ -1,0 +1,117 @@
+<div *ngIf="!bookingId">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-7">
+                <h5>Continent: {{data.continent}}</h5>
+                <div class="package-inclusion">
+                    <h5>Package Inclusion:</h5>
+                    <h6>{{data.details.packageInclusion}}</h6>
+                </div>
+
+                <table class="table">
+                    <tr>
+                        <th>No. of Nights</th>
+                        <td>:</td>
+                        <td>{{data.noOfNights}}</td>
+                    </tr>
+                    <tr>
+                        <th>Flight Charge</th>
+                        <td>:</td>
+                        <td>{{data.flightCharge | currency:'INR'}}</td>
+                    </tr>
+                    <tr>
+                        <th>Charge Per Person</th>
+                        <td>:</td>
+                        <td>{{data.chargePerPerson | currency: 'INR'}}</td>
+                    </tr>
+                    <tr>
+                        <th>Discount ({{data.discount}}%)</th>
+                        <td>:</td>
+                        <td>{{data.discount*bookingForm.value.noOfPeople*data.chargePerPerson/100 | currency: 'INR'}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Total Amount</th>
+                        <td>:</td>
+                        <th>{{bookingForm.value.noOfPeople*data.chargePerPerson*(1-data.discount/100)+data.flightCharge | currency: 'INR'}}
+                        </th>
+                    </tr>
+                </table>
+
+
+
+            </div>
+
+            <div class="col-md-5">
+                <img src={{data.imageUrl}} width="100%">
+                <br><br>
+                <div class="row">
+
+
+                    <!-- <form #bookingForm="ngForm">
+                    <div class="form-group">
+                        <label for="journeyDate">Journey Date</label>
+                        <input id="journeyDate" class="form-control" [(ngModel)]="booking.checkInDate" type="date"
+                            pInputText>
+                    </div>
+                    <div class="form-group">
+                        <label for="noOfPeople">Number of People</label>
+                        <p-inputNumber [(ngModel)]="booking.noOfPeople" id="noOfPeople" class="form-control" [showButtons]="true" [min]="1" [max]="7"
+                                size="8">
+                            </p-inputNumber>
+
+                    </div>
+                </form> -->
+
+
+                    <form class="form" [formGroup]="bookingForm" (submit)="confirmBooking()">
+                        <div class="row">
+                            <div class="col form-group">
+                                <label for="journeyDate">Journey Date</label>
+                                <input type="date" id="checkIn" formControlName="checkIn" class="form-control"
+                                    [min]="minDate" [max]="maxDate">
+                            </div>
+                            <div class="col form-group">
+                                <label for="noOfPeople">No of People <span class="text-danger">(Max 11)</span></label>
+                                <p-inputNumber formControlName="noOfPeople" id="noOfPeople" [min]="1" [max]="11">
+                                </p-inputNumber>
+                            </div>
+                        </div>
+
+                        <div class="form-check">
+                            <label class="form-check-label text-danger">
+                                <input class="form-check-input" type="checkbox" [disabled]="!bookingForm.valid"
+                                    (change)="checkBox()">I confirm the date and
+                                want to proceed.</label>
+                        </div>
+                        <br>
+                        <button class="btn btn-info btn-block" [disabled]="!bookingForm.valid || !checked">Confirm
+                            Booking</button>
+                    </form>
+
+                    <!-- <div class="col-md-6">
+                    <h6>Journey Date:</h6>
+                    
+
+                </div>
+
+
+                <div class="col-md-6">
+                    <h6>No. of People:</h6>
+                    
+                </div> -->
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid" *ngIf="bookingId">
+    <h3 class="text-success">Congrats Booking Successful. Your Booking Id is {{bookingId}}. Click <a routerLink
+            (click)="toPlannedTrips()">here</a> to check your booking details.</h3>
+</div>

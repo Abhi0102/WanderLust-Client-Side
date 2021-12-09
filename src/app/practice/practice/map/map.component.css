@@ -1,0 +1,27 @@
+/* @media only screen and (max-width: 650px) {
+    #india {
+        width: 100%;
+        margin: left;
+        padding-bottom: 42% !important;
+        min-height: 24em;
+    }
+} */
+#india{
+    /* width: 100%; */
+    width: 110%;
+    padding-top: 50px;
+    /* overflow: hidden; */
+    /* position: absolute; */
+    /* height: 100%; */
+    /* margin: left; */
+    /* position: relative; */
+    /* max-height: 1000px; */
+    /* left: 80%; */
+    min-height: 550px;
+    transform: translateX(-20%);
+
+}
+
+
+
+

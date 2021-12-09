@@ -1,0 +1,32 @@
+.table-bordered {
+    border: 7px solid #343a40;
+}
+.table-bordered td, .table-bordered th {
+    border: 7px solid #343a40;
+}
+.head{
+    background-color: rgba(255, 255, 255, .05);
+    font-size: 15px;   
+}
+.state{
+    background-color: rgba(255, 255, 255, .05);
+}
+.change{
+    font-size: 12px;
+    text-align: right;
+}
+.tot{
+    font-size: 14px;
+    text-align: right;
+    color: #c0bbbb;
+}
+.arrowImg{
+    color: white;
+    font-size: 16px;
+    float: right;
+}
+.sortIcon{
+    float: left;
+    position: relative;
+    font-size: 10px;
+}

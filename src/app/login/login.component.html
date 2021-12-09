@@ -1,0 +1,36 @@
+<div class="container start">
+    <div class="col-md-4 col-sm-10 offset-md-4 offset-sm-1">
+        <h1>Login</h1>
+
+        <form class="form" [formGroup]="loginForm" (submit)="login()">
+            <div class="form-group">
+                <label>Contact Number<span class="text-danger">*</span></label>
+                <input type="text" formControlName="contactNumber" pInputText pKeyFilter="pint" class="form-control" autofocus>
+                <p class="text-danger"
+                    *ngIf="loginForm.controls.contactNumber.errors?.required && loginForm.controls.contactNumber.touched">
+                    Please Enter Mobile Number</p>
+                <p class="text-danger"
+                    *ngIf="loginForm.controls.contactNumber.errors?.pattern && loginForm.controls.contactNumber.touched">
+                    Please Enter Correct Mobile Number</p>
+            </div>
+
+            <div class="form-group">
+                <label>Password<span class="text-danger">*</span></label>
+                <input type="password" formControlName="password" class="form-control" autofocus>
+                <p class="text-danger"
+                    *ngIf="loginForm.controls.password.invalid && loginForm.controls.password.touched">Please Enter
+                    Password</p>
+            </div>
+            
+                <button type="submit" class="btn btn-primary mr-2" [disabled]="!loginForm.valid || submitted">Login</button>
+                <button type="button" class="btn btn-info mr-2" [disabled]="submitted" (click)="register()">Click Here
+                    To
+                    Register</button>
+        
+        </form>
+
+        <p-toast [style]="{marginTop:'70px'}" life="5000"></p-toast>
+
+
+    </div>
+</div>

@@ -1,0 +1,170 @@
+<div class="start">
+    <div class="row">
+        <div class="col-md-6">
+
+
+
+            <h1>Planned Trips</h1>
+        </div>
+        <div class="col-md-2 offset-md-2">
+            <!-- {{booking | json}} -->
+            <!-- <hr> -->
+            <div class="form-group">
+                <label for="SortBy">Sort By:</label>
+                <select class="form-control" id="SortBy" [(ngModel)]="sorter">
+                    <option value="default">Default Sorting</option>
+                    <option value="idInc">Booking Id Low&#8594;High</option>
+                    <option value="idDec">Booking Id High&#8594;Low</option>
+                    <!-- <option *ngFor="let d of continent" value={{d}}>{{d}}</option> -->
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <!-- {{booking | json}} -->
+            <!-- <hr> -->
+            <div class="form-group">
+                <label for="FilterBy">Filter By:</label>
+                <select class="form-control" id="FilterBy" [(ngModel)]="filterBy">
+                    <option value="plannedAll">Show All</option>
+                    <option value="plannedUpcoming">Upcoming Trip</option>
+                    <option value="plannedOngoing">Ongoing Trip</option>
+                    <option value="plannedCompleted">Completed Trip</option>
+                    <!-- <option *ngFor="let d of continent" value={{d}}>{{d}}</option> -->
+                </select>
+            </div>
+        </div>
+    </div>
+
+
+    <div *ngIf="responseLength">
+        <div class="sec" *ngFor="let d of booking  |unique:filterBy |bookingSort:sorter">
+            <hr>
+            <br>
+            <div class="jumbotron">
+                <div class="container-fluid">
+                    <h1>{{d.destination.continent}}</h1>
+
+                    <div class="row">
+                        <div class="col-md-7">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <h5>{{d.destination.destinationName}}</h5>
+                                </div>
+                                <div class="col-md-2">
+                                    <h5>{{d.destination.noOfNights}} Nights</h5>
+                                </div>
+                            </div>
+                            <!-- <p class="about">{{d.destination.details.about}}</p> -->
+                            <!-- <h6 class="highlights">Highlights: </h6><span
+                            class="text-justify">{{d.destination.details.highlights}}</span>
+                        <br><br> -->
+                            <h6 class="booking-details">Booking Details: </h6><span class="text-justify">
+
+
+                                <table class="table">
+                                    <tr>
+                                        <td>Booking Id</td>
+                                        <td>:</td>
+                                        <th>{{d.bookingId}}</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Check In</td>
+                                        <td>:</td>
+                                        <th>{{d.checkIn | date}}</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Check Out</td>
+                                        <td>:</td>
+                                        <th>{{d.checkOut | date}}</th>
+                                    </tr>
+                                    <tr>
+                                        <td>No. of People</td>
+                                        <td>:</td>
+                                        <th>{{d.noOfPeople}}</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Total Amount</td>
+                                        <td>:</td>
+                                        <th>{{d.totalCost | currency: 'INR'}}
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td>Time of Booking</td>
+                                        <td>:</td>
+                                        <th>{{d.timeOfBooking | date:'medium'}}
+                                        </th>
+                                    </tr>
+
+                                </table>
+
+
+
+
+
+
+
+
+                            </span>
+
+
+
+
+
+
+
+
+                            <h6 class="booking-details">Itinerary: </h6><span class="text-justify">
+
+
+                                <table class="table">
+                                    <tr>
+                                        <td>First Day</td>
+                                        <td>:</td>
+                                        <th>{{d.destination.details.itinerary.firstDay |format}}</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Rest of Days</td>
+                                        <td>:</td>
+                                        <th>{{d.destination.details.itinerary.restOfDays |format}}</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Last Day</td>
+                                        <td>:</td>
+                                        <th>{{d.destination.details.itinerary.lastDay |format}}</th>
+                                    </tr>
+                                </table>
+
+                            </span>
+
+
+                            <p class="text-danger pace">*{{d.destination.details.pace}}</p>
+                        </div>
+
+                        <div class="col-md-5">
+                            <img src={{d.destination.imageUrl}} class="rounded img-fluid" width="100%">
+                            <br><br>
+                            <button class="btn book btn-danger btn-lg btn-block" *ngIf="todayStr<d.checkIn"
+                                (click)="confirmCancelBooking(d)">Cancel Booking</button>
+                            <h4 class="text-success text-center" *ngIf="todayStr<=d.checkOut && todayStr>=d.checkIn">
+                                Trip in
+                                Progress...</h4>
+                            <h4 class="text-success text-center" *ngIf="todayStr>d.checkOut">Trip Completed... Hope You
+                                enjoyed!!</h4>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+    <hr>
+    <div class="notPlanned" *ngIf="!responseLength">
+        
+        <h1 class="sorry"><i class="fa  fa-frown-o"></i>&nbsp;Sorry You Havn't Planned Any Trip With Us...</h1>
+    </div>
+    <p-toast [style]="{marginTop:'70px'}" life="5000"></p-toast>
+</div>
